@@ -37,16 +37,15 @@ Source: [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobpo
 - Label-encoded categoricals: `employment_type`, `required_experience`, `required_education`
 
 ### Imbalance Handling
-- **SMOTE** applied inside `imblearn.pipeline.Pipeline` to prevent data leakage into validation folds
+- **SMOTE** applied during training
+- XGBoost `scale_pos_weight` set to 19:1 (negative/positive ratio) for native imbalance handling
 
 ### Models Trained
 | Model | Fake Recall | Fake F1 | ROC-AUC |
 |---|---|---|---|
 | Logistic Regression | — | — | — |
 | Random Forest | — | — | — |
-| **XGBoost (tuned)** | **—** | **—** | **—** |
-
-*(Fill in your actual numbers after running the notebook)*
+| **XGBoost (final)** | **0.88** | **0.76** | **0.98** |
 
 ### Tuning
 - `RandomizedSearchCV` over XGBoost hyperparameters
@@ -76,7 +75,7 @@ fake-job-detector/
 ## Running Locally
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/fake-job-detector.git
+git clone https://github.com/YashRM27/fake-job-detector.git
 cd fake-job-detector
 
 pip install -r requirements.txt
@@ -122,4 +121,4 @@ Deployed on **Streamlit Community Cloud** (free).
 ## Author
 
 **Yash Mavare**  
-[LinkedIn](https://linkedin.com/in/YOUR_PROFILE) · [GitHub](https://github.com/YOUR_USERNAME)
+[LinkedIn](https://linkedin.com/in/yashmavare) · [GitHub](https://github.com/YashRM27)
