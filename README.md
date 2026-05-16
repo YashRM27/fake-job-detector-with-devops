@@ -111,6 +111,7 @@ docker run -p 8501:8501 yashrm27/fake-job-detector
 Then open **http://localhost:8501** in your browser.
 
 Docker Hub: https://hub.docker.com/r/yashrm27/fake-job-detector
+
 ---
 
 ## App Features
