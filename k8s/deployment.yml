@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fake-job-detector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fake-job-detector
+  template:
+    metadata:
+      labels:
+        app: fake-job-detector
+    spec:
+      containers:
+      - name: fake-job-detector
+        image: yashrm27/fake-job-detector:latest
+        ports:
+        - containerPort: 8501
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

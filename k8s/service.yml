@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fake-job-detector-service
+spec:
+  selector:
+    app: fake-job-detector
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8501
+  type: NodePort
