@@ -1,4 +1,4 @@
-# 🔍 Fake Job Posting Detector
+# 🔍 Fake Job Posting Detector — Cloud-Native ML Service
 
 A machine learning web app that predicts whether a job posting is **Real or Fake** using NLP and classification.
 
@@ -56,17 +56,54 @@ Source: [Kaggle](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobpo
 ## Project Structure
 
 ```
-fake-job-detector/
-├── notebooks/
-│   ├── fake_job_detector_colab.ipynb
-├── model/
-│   ├── best_model.pkl
-│   ├── tfidf_vectorizer.pkl
-│   └── structured_features.pkl
-├── app.py                  # Streamlit app
+fake-job-detector-with-devops/
+├── app.py
 ├── requirements.txt
-├── .gitignore
+├── Dockerfile
+├── .dockerignore
+├── model/
+├── notebooks/
+├── k8s/
+│   ├── deployment.yml
+│   └── service.yml
+├── ansible/
+│   └── playbook.yml
+├── .github/
+│   └── workflows/
+│       └── docker-build.yml
 └── README.md
+```
+
+---
+
+## DevOps Architecture
+
+| Layer | Tool | Purpose |
+|---|---|---|
+| Containerisation | Docker | Package app + dependencies |
+| CI/CD | GitHub Actions | Auto build & push on every commit |
+| Orchestration | Kubernetes | 2 replica deployment with health checks |
+| Provisioning | Ansible | One-command environment setup |
+| Registry | Docker Hub | Public image repository |
+
+## Quick Start
+
+### Option 1 — Docker
+```bash
+docker pull yashrm27/fake-job-detector:latest
+docker run -p 8501:8501 yashrm27/fake-job-detector:latest
+```
+
+### Option 2 — Ansible
+```bash
+ansible-playbook ansible/playbook.yml
+```
+
+### Option 3 — Kubernetes
+```bash
+kubectl apply -f k8s/deployment.yml
+kubectl apply -f k8s/service.yml
+minikube service fake-job-detector-service
 ```
 
 ---
