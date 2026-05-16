@@ -1,0 +1,24 @@
+---
+- name: Deploy Fake Job Detector
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Pull latest Docker image
+      command: docker pull yashrm27/fake-job-detector:latest
+
+    - name: Stop existing container if running
+      command: docker rm -f fake-job-detector
+      ignore_errors: yes
+
+    - name: Run container
+      command: docker run -d --name fake-job-detector -p 8501:8501 --restart always yashrm27/fake-job-detector:latest
+
+    - name: Verify container is running
+      command: docker ps --filter name=fake-job-detector
+      register: output
+
+    - name: Show output
+      debug:
+        var: output.stdout
